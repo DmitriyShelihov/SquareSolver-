@@ -24,15 +24,15 @@ int Input_Coefficients(double *a, double *b, double *c){
     assert(&(*b) != NULL);
     assert(&(*c) != NULL);
     int coefficients = -1;
-    printf("Введите коэффициенты уравнения: ");
+    printf("Р’РІРµРґРёС‚Рµ РєРѕСЌС„С„РёС†РёРµРЅС‚С‹ СѓСЂР°РІРЅРµРЅРёСЏ: ");
     while((coefficients = scanf("%lf %lf %lf", &(*a), &(*b), &(*c))) != 3){
         if (coefficients == EOF){
-            printf("Конец файла! Ввод закончен\n");
+            printf("РљРѕРЅРµС† С„Р°Р№Р»Р°! Р’РІРѕРґ Р·Р°РєРѕРЅС‡РµРЅ\n");
             return UNSUCCESS;
         }
         else{
             Clear_Input();
-            printf("ERROR! Проверьте значения и введите числа заново: ");
+            printf("ERROR! РџСЂРѕРІРµСЂСЊС‚Рµ Р·РЅР°С‡РµРЅРёСЏ Рё РІРІРµРґРёС‚Рµ С‡РёСЃР»Р° Р·Р°РЅРѕРІРѕ: ");
         }
     }
     return SUCCESS;
@@ -95,16 +95,16 @@ void Output_Answer(enum SOLUTIONS solutions, double x1, double x2){
     assert(x2 != NAN);
     switch(solutions){
         case NO_SOLUTIONS:
-            printf("Решений нет\n");
+            printf("Р РµС€РµРЅРёР№ РЅРµС‚\n");
             break;
         case INFINITY_SOLUTIONS:
-            printf("Бесконечно много решений\n");
+            printf("Р‘РµСЃРєРѕРЅРµС‡РЅРѕ РјРЅРѕРіРѕ СЂРµС€РµРЅРёР№\n");
             break;
         case ONE:
-            printf("Единственное решение:  %lf\n", x1);
+            printf("Р•РґРёРЅСЃС‚РІРµРЅРЅРѕРµ СЂРµС€РµРЅРёРµ:  %lf\n", x1);
             break;
         case TWO:
-            printf("Два различных решения: %lf  %lf\n", x1, x2);
+            printf("Р”РІР° СЂР°Р·Р»РёС‡РЅС‹С… СЂРµС€РµРЅРёСЏ: %lf  %lf\n", x1, x2);
         default:
             break;
     }
