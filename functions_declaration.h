@@ -25,7 +25,7 @@ enum SOLUTIONS
 
 enum RESULT
     {
-    UNSUCCESS = 0;  ///< if the user has not entered 3 coefficients.
+    UNSUCCESS = 0,  ///< if the user has not entered 3 coefficients.
     SUCCESS = 1     ///< if the user has successfully entered 3 coefficients.
     };
 
