@@ -6,8 +6,8 @@
 #include "TXLib.h"
 #include <stdio.h>
 #include <assert.h>
-#include "functions_declaration.h"
-#include "core_functions.cpp"
+#include "core_functions.h"
+#include "testing_mode.h"
 
 /*! The main function.
     Starts the mode selection function

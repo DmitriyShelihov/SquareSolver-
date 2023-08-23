@@ -1,10 +1,11 @@
+#ifndef CORE_FUNCTIONS_H
+#define CORE_FUNCTIONS_H
+
 /*!
 \file
 \brief Header file with function and enum description
 */
 
-#ifndef FUNCTIONS_DECLARATION_H
-#define FUNCTIONS_DECLARATION_H
 
 /*!
 \brief Enum needed to store number of roots
@@ -33,7 +34,7 @@ enum RESULT
 \brief constants needed compare numbers
 */
 
-const double eps = 1.0e-5; ///epsilon if a very small fractional number needed to compare floating point numbers
+const double eps = 1.0e-5; ///< epsilon if a very small fractional number needed to compare floating point numbers
 
 /*!
  \brief a function that compares a with epsilon and starts, depending on this, a function for solving linear
@@ -61,7 +62,7 @@ int controller_function(double, double, double, double*, double*);
 
 int input_coefficients(double*, double*, double*);
 
-/*!
+/*! 
  \brief a function solving a linear quadratic equation.
  \param b - the coefficient near x in square equation.
  \param c - the constant in square equation.
@@ -94,6 +95,8 @@ int solve_quadratic(double, double, double, double*, double*);
  \param x2 - the second root of the equation.
 
 */
+
+
 
 void output_answer(SOLUTIONS, double, double);
 
@@ -128,13 +131,6 @@ bool comparison_two_doubles(double, double);
 
 */
 
-void testing_mode();
-
-/*!
- \brief an important function that connects the functions of input,
- equation solution and output.
-
-*/
 
 void normal_mode();
 

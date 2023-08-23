@@ -1,11 +1,11 @@
-SquareSolver programm. Version 1.0 22/08/2023
+SquareSolver programm. Version 1.1 23/08/2023
 
 GENERAL USAGE NOTES
 ----------------------------------
 
--Language writing C++ (C standart).
+-Language writing is C.
 
--To compile the program, load all the source files into the compiler and press f5
+-To compile program in test mode, use g++ core_functions.cpp main_square_solver.cpp testing_mode.cpp -Wall -Wextra -o SquareSolver.exe.
 
 -The program solves a quadratic equation for the entered coefficients. 
 
@@ -26,7 +26,7 @@ NORMAL_MODE
 TESTING_MODE
 -----------------------------------------------------------------------------------------------
 
--Еhis mode provides pre-entered values in the file Tests.txt according to which the program will work. 
+-This mode provides pre-entered values in the file Tests.txt according to which the program will work. 
 
 -After execution, the user will receive detailed information about each test and the percentage distribution of successful and unsuccessful tests.
 ==================================================================================================================================================
@@ -48,4 +48,3 @@ ABOUT FILLING OUT THE TEST FILE
 If you have any questions, please contact shelikhov.ds@phystech.edu
 SHD, 2023
 ===================================================================
-
