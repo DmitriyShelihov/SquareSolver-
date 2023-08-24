@@ -6,6 +6,17 @@
 \brief Header file with function and enum description
 */
 
+/*!
+\brief Enum needed to store code of the error
+*/
+
+enum ERRORS
+    {
+    NAN_ERROR = 0,
+    NULL_ERROR = 1,
+    POINTER_MATCHING = 2,
+    FILE_NOT_FOUND = 3
+    };
 
 /*!
 \brief Enum needed to store number of roots
@@ -62,7 +73,7 @@ int controller_function(double, double, double, double*, double*);
 
 int input_coefficients(double*, double*, double*);
 
-/*! 
+/*!
  \brief a function solving a linear quadratic equation.
  \param b - the coefficient near x in square equation.
  \param c - the constant in square equation.
@@ -154,6 +165,13 @@ void true_answer();
 */
 
 void false_answer();
+
+/*!
+ \brief a function that outputs the text about the error(custom assert).
+
+*/
+
+void call_errors(const int, ERRORS, const char*, const char*);
 
 
 #endif
