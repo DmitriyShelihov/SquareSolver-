@@ -6,16 +6,33 @@
 \brief Header file with function and enum description
 */
 
+#define POSITION_IN_CODE __FILE__, __PRETTY_FUNCTION__, __LINE__  ///< a define that combines three position macros in the code
+
+/*!
+\brief a define that checks a variable for an error.
+*/
+
+#define cooler_assert(condition, error_code)                                                                                  \
+        if (condition)                                                                                                        \
+            {                                                                                                                 \
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);                                         \
+            printf ("Assert %s in file %s in %s:%d failed\n", #condition, POSITION_IN_CODE);                                  \
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);    \
+            call_errors(error_code);                                                                                          \
+            return error_code;                                                                                                \
+            }
+
 /*!
 \brief Enum needed to store code of the error
 */
 
 enum ERRORS
     {
-    NAN_ERROR = 0,
-    NULL_ERROR = 1,
-    POINTER_MATCHING = 2,
-    FILE_NOT_FOUND = 3
+    NAN_ERROR = 0,          ///<if NAN or INFINITE variable was found
+    NULL_ERROR = 1,         ///<if NULL pointer was found
+    POINTER_MATCHING = 2,   ///<if two equal pointers was found
+    FILE_NOT_FOUND = 3,     ///<if there is no file
+    NOT_ERROR = 4           ///<if there is no error
     };
 
 /*!
@@ -50,66 +67,83 @@ const double eps = 1.0e-5; ///< epsilon if a very small fractional number needed
 /*!
  \brief a function that compares a with epsilon and starts, depending on this, a function for solving linear
  and quadratic equations.
+ \param solutions - pointer to the variable that contains the number of roots obtained from the equation solution function.
  \param a - coefficient near x^2 in square equation.
  \param b - coefficient near x in square equation.
  \param ñ - constant in square equation.
- \param *x1 - pointer to the first root of the equation.
- \param *x2 - pointer to the first root of the equation.
- \return solutions - number of equation solutions described in enum SOLUTIONS
+ \param x1 - pointer to the first root of the equation.
+ \param x2 - pointer to the first root of the equation.
+ \return NOT_ERROR - if the function has shut down correctly,
+         NAN_ERROR - if the value of the NAN variable was found,
+         NULL_ERROR - if an empty pointer was found.
+         POINTER_MATCHING - if two variables with the same address are found.
 
 */
 
-int controller_function(double, double, double, double*, double*);
+ERRORS solver_function(SOLUTIONS*, double, double, double, double*, double*);
 
 /*!
  \brief a function that takes three coefficients of the equation
  and enters them again if the user makes a mistake.
- \param *a - pointer to the coefficient near x^2 in square equation.
- \param *b - pointer to the coefficient near x in square equation.
- \param *ñ - pointer to the constant in square equation.
- \return SUCCESS - if the input was successful, UNSUCCESS - if the input was unsuccessful.
+ \param a - pointer to the coefficient near x^2 in square equation.
+ \param b - pointer to the coefficient near x in square equation.
+ \param ñ - pointer to the constant in square equation.
+ \param result - pointer to the result about entering coefficients
+ \return NOT_ERROR - if the function has shut down correctly,
+         NAN_ERROR - if the value of the NAN variable was found,
+         NULL_ERROR - if an empty pointer was found.
+         POINTER_MATCHING - if two variables with the same address are found.
 
 */
 
-int input_coefficients(double*, double*, double*);
+ERRORS input_coefficients(double*, double*, double*,  RESULT *);
 
 /*!
  \brief a function solving a linear quadratic equation.
+ \param solutions - variable that contains the number of roots obtained from the equation solution function.
  \param b - the coefficient near x in square equation.
  \param c - the constant in square equation.
- \param *x1 - pointer to the first root of the equation.
- \return INFINITY_SOLUTIONS - if the equation has infinite solutions, NO_SOLUTIONS - if the equation has no solutions,
- ONE_SOLUTION - if the equation has one solution.
+ \param x1 - pointer to the first root of the equation.
+ \return NOT_ERROR - if the function has shut down correctly,
+         NAN_ERROR - if the value of the NAN variable was found,
+         NULL_ERROR - if an empty pointer was found.
+         POINTER_MATCHING - if two variables with the same address are found.
 
 */
 
-int solve_linear(double, double, double*);
+ERRORS solve_linear(SOLUTIONS*, double, double, double*);
 
 /*!
  \brief a function solving a quadratic equation.
+ \param solutions - variable that contains the number of roots obtained from the equation solution function.
  \param a - coefficient near x^2 in square equation.
  \param b - coefficient near x in square equation.
  \param ñ - constant in square equation.
- \param *x1 - pointer to the first root of the equation.
- \param *x2 - pointer to the second root of the equation.
- \return ONE_SOLUTION - if the equation has one solution, NO_SOLUTIONS - if the equation has no solutions,
- TWO_SOLUTIONS - if the equation has two solutions.
+ \param x1 - pointer to the first root of the equation.
+ \param x2 - pointer to the second root of the equation.
+ \return NOT_ERROR - if the function has shut down correctly,
+         NAN_ERROR - if the value of the NAN variable was found,
+         NULL_ERROR - if an empty pointer was found.
+         POINTER_MATCHING - if two variables with the same address are found.
 
 */
 
-int solve_quadratic(double, double, double, double*, double*);
+ERRORS solve_quadratic(SOLUTIONS*, double, double, double, double*, double*);
 
 /*!
  \brief a function that prints the answer depending on the number of solutions.
- \param SOLUTIONS - enum that contains the number of roots.
+ \param solutions - variable that contains the number of roots obtained from the equation solution function.
  \param x1 - the first root of the equation.
  \param x2 - the second root of the equation.
-
+ \return NOT_ERROR - if the function has shut down correctly,
+         NAN_ERROR - if the value of the NAN variable was found,
+         NULL_ERROR - if an empty pointer was found.
+         POINTER_MATCHING - if two variables with the same address are found.
 */
 
 
 
-void output_answer(SOLUTIONS, double, double);
+ERRORS output_answer(SOLUTIONS, double, double);
 
 /*!
  \brief a function to remove extra characters from the buffer
@@ -122,23 +156,31 @@ void clear_input();
 /*!
  \brief a function that compares a floating point number with epsilon.
  \param number - the number that is compared.
- \return true - if the number is epsilon, false - if the number in not epsilon;
+ \param result_of_compare - comparison result: equal with 0 (true) or not equal with 0(false)
+ \return NOT_ERROR - if the function has shut down correctly,
+         NAN_ERROR - if the value of the NAN variable was found,
+         NULL_ERROR - if an empty pointer was found.
+         POINTER_MATCHING - if two variables with the same address are found.
 */
 
-bool comparison_with_eps(double);
+ERRORS comparison_with_eps(double, bool *);
 
 /*!
  \brief a function that compares two floating point numbers.
  \param number1 - the first compared number.
  \param number2 - the second compared number.
- \return true - if the numbers are equal, false - if the numbers are not equal;
+ \param result_of_compare - comparison result: number are equal (true) or different (false)
+ \return NOT_ERROR - if the function has shut down correctly,
+         NAN_ERROR - if the value of the NAN variable was found,
+         NULL_ERROR - if an empty pointer was found.
+         POINTER_MATCHING - if two variables with the same address are found.
 
 */
 
-bool comparison_two_doubles(double, double);
+ERRORS comparison_two_doubles(double, double, bool *);
 
 /*!
- \brief an important function that tests the SquareSolver program on data from a txt file and outputs the test results.
+ \brief function that tests the SquareSolver program on data from a txt file and outputs the test results.
 
 */
 
@@ -146,32 +188,29 @@ bool comparison_two_doubles(double, double);
 void normal_mode();
 
 /*!
- \brief the function responsible for selecting the test mode: manual or from a file.
+ \brief function responsible for selecting the test mode: manual or from a file.
 
 */
 
 void choosing_the_mode();
 
-/*!
- \brief a function that outputs the text about the correct answer.
-
-*/
-
-void true_answer();
-
-/*!
- \brief a function that outputs the text about the incorrect answer.
-
-*/
-
-void false_answer();
 
 /*!
  \brief a function that outputs the text about the error(custom assert).
-
+ \param errors - the variable that contains the error code.
+ \return NOT_ERROR - if the function has shut down correctly,
+         NAN_ERROR - if the value of the NAN variable was found,
+         NULL_ERROR - if an empty pointer was found.
+         POINTER_MATCHING - if two variables with the same address are found.
 */
 
-void call_errors(const int, ERRORS, const char*, const char*);
+ERRORS call_errors(ERRORS);
+
+/*!
+ \brief function that prints the main information about the test(author and version).
+
+*/
+void print_main_information();
 
 
 #endif

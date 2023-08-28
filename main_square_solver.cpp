@@ -15,11 +15,9 @@
 
 int main()
     {
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE);
-    printf("# Square Solver!\n"
-           "# Square equation solver\n");
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
+    print_main_information();
     choosing_the_mode();
+
     return 0;
     }
 
