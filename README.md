@@ -6,6 +6,8 @@
 
 + To compile program in test mode, use g++ core_functions.cpp main_square_solver.cpp testing_mode.cpp assertion.cpp -Wall -Wextra -o SquareSolver.exe.
 
++also use flags from the file CMD.txt
+
 + The program solves a quadratic equation for the entered coefficients. 
 
 + If there are no solutions or some error has occurred, the program will report it. 
