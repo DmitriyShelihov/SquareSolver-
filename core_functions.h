@@ -1,39 +1,7 @@
 #ifndef CORE_FUNCTIONS_H
 #define CORE_FUNCTIONS_H
 
-/*!
-\file
-\brief Header file with function and enum description
-*/
 
-#define POSITION_IN_CODE __FILE__, __PRETTY_FUNCTION__, __LINE__  ///< a define that combines three position macros in the code
-
-/*!
-\brief a define that checks a variable for an error.
-*/
-
-#define cooler_assert(condition, error_code)                                                                                  \
-        if (condition)                                                                                                        \
-            {                                                                                                                 \
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);                                         \
-            printf ("Assert %s in file %s in %s:%d failed\n", #condition, POSITION_IN_CODE);                                  \
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);    \
-            call_errors(error_code);                                                                                          \
-            return error_code;                                                                                                \
-            }
-
-/*!
-\brief Enum needed to store code of the error
-*/
-
-enum ERRORS
-    {
-    NAN_ERROR = 0,          ///<if NAN or INFINITE variable was found
-    NULL_ERROR = 1,         ///<if NULL pointer was found
-    POINTER_MATCHING = 2,   ///<if two equal pointers was found
-    FILE_NOT_FOUND = 3,     ///<if there is no file
-    NOT_ERROR = 4           ///<if there is no error
-    };
 
 /*!
 \brief Enum needed to store number of roots
@@ -57,6 +25,21 @@ enum RESULT
     UNSUCCESS = 0,  ///< if the user has not entered 3 coefficients.
     SUCCESS = 1     ///< if the user has successfully entered 3 coefficients.
     };
+
+
+/*!
+\brief Enum needed to store code of the error
+*/
+
+enum ERRORS
+    {
+    NAN_ERROR = 0,          ///<if NAN or INFINITE variable was found
+    NULL_ERROR = 1,         ///<if NULL pointer was found
+    POINTER_MATCHING = 2,   ///<if two equal pointers was found
+    FILE_NOT_FOUND = 3,     ///<if there is no file
+    NOT_ERROR = 4           ///<if there is no error
+    };
+
 
 /*!
 \brief constants needed compare numbers

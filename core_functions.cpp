@@ -9,6 +9,7 @@
 #include <assert.h>
 #include "core_functions.h"
 #include "testing_mode.h"
+#include "assertion.h"
 
 
 
@@ -22,8 +23,7 @@ void choosing_the_mode()
 
     #else
         if (testing_mode() == NOT_ERROR)
-            {
-            }
+            ;
     #endif
     }
 
@@ -37,9 +37,7 @@ void normal_mode()
         {
         if (solver_function(&solutions, a, b, c, &x1, &x2) == NOT_ERROR)
             output_answer(solutions, x1, x2);
-        else
-            {
-            }
+
         }
     }
 
@@ -188,8 +186,7 @@ ERRORS output_answer(enum SOLUTIONS solutions, double x1, double x2)
         cooler_assert(!isfinite(x2), NAN_ERROR);
         }
     else
-        {
-        }
+        ;
     cooler_assert(!isfinite(solutions), NAN_ERROR);
 
     switch(solutions)
@@ -245,37 +242,7 @@ void clear_input()
         ;
     }
 
-ERRORS call_errors(enum ERRORS errors)
-    {
-    cooler_assert(!isfinite(errors), NAN_ERROR);
 
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);
-
-    switch (errors)
-        {
-
-        case NAN_ERROR:
-            printf("The value of the variable is not defined! (NAN variable)\n");
-            break;
-        case NULL_ERROR:
-            printf("The pointer is not defined! (NULL pointer)\n");
-            break;
-        case POINTER_MATCHING:
-            printf("Matching addresses! (pointer = pointer)\n");
-            break;
-        case FILE_NOT_FOUND:
-            printf("File not found! (NULL file pointer)\n");
-            break;
-        case NOT_ERROR:
-            printf("Correct program\n");
-            break;
-        default:
-            break;
-        }
-    printf("\n");
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
-    return NOT_ERROR;
-    }
 
 
 void print_main_information()

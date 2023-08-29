@@ -8,6 +8,7 @@
 #include <assert.h>
 #include "core_functions.h"
 #include "testing_mode.h"
+#include "assertion.h"
 
 /*! The main function.
     Starts the mode selection function
