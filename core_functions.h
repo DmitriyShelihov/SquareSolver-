@@ -170,13 +170,6 @@ ERRORS comparison_two_doubles(double, double, bool *);
 
 void normal_mode();
 
-/*!
- \brief function responsible for selecting the test mode: manual or from a file.
-
-*/
-
-void choosing_the_mode();
-
 
 /*!
  \brief a function that outputs the text about the error(custom assert).
@@ -194,6 +187,12 @@ ERRORS call_errors(ERRORS);
 
 */
 void print_main_information();
+
+/*!
+ \brief functions that sets the colour of text.
+ \param wished_colour - installable colour.
+*/
+void set_colour(short unsigned int);
 
 
 #endif

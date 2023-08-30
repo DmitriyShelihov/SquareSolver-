@@ -13,27 +13,13 @@
 
 
 
-void choosing_the_mode()
-    {
-
-    #define TESTS
-
-    #ifndef TEST
-        normal_mode();
-
-    #else
-        if (testing_mode() == NOT_ERROR)
-            ;
-    #endif
-    }
-
 void normal_mode()
     {
     double a = NAN, b = NAN, c = NAN;
     double x1 = NAN, x2 = NAN;
     enum SOLUTIONS solutions = DEFAULT_VALUE;
     enum RESULT result = UNSUCCESS;
-    if (input_coefficients(&a, &b, &c, &result))
+    if (input_coefficients(&a, &b, &c, &result)== NOT_ERROR)
         {
         if (solver_function(&solutions, a, b, c, &x1, &x2) == NOT_ERROR)
             output_answer(solutions, x1, x2);
@@ -186,7 +172,8 @@ ERRORS output_answer(enum SOLUTIONS solutions, double x1, double x2)
         cooler_assert(!isfinite(x2), NAN_ERROR);
         }
     else
-        ;
+        {
+        }
     cooler_assert(!isfinite(solutions), NAN_ERROR);
 
     switch(solutions)
@@ -243,14 +230,18 @@ void clear_input()
     }
 
 
-
-
 void print_main_information()
     {
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE);
+    set_colour(FOREGROUND_BLUE);
     printf("# Square equation solver\n"
            "# Version 1.4 (c) SHD, 2023\n\n");
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
+    set_colour(FOREGROUND_GREY);
+    }
+
+
+void set_colour(short unsigned int wished_colour)
+    {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), wished_colour);
     }
 
 

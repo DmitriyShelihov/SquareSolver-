@@ -17,7 +17,16 @@
 int main()
     {
     print_main_information();
-    choosing_the_mode();
+
+    #define TESTS
+
+    #ifndef TEST
+        normal_mode();
+
+    #else
+        testing_mode();
+
+    #endif
 
     return 0;
     }

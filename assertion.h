@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <assert.h>
 
+const short unsigned int FOREGROUND_GREY = FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN;
 
 /*!
 \file
@@ -23,10 +24,10 @@
     #define cooler_assert(condition, error_code)                                                                              \
         if (condition)                                                                                                        \
             {                                                                                                                 \
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);                                         \
+            set_colour(FOREGROUND_RED);                                         \
             fprintf (stderr, "Assert %s in file %s in %s:%d failed\n", #condition, POSITION_IN_CODE);                         \
-            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);    \
-            call_errors(error_code);                                                                                          \
+            set_colour(FOREGROUND_GREY); \
+            call_errors (error_code);                                                                                          \
             return error_code;                                                                                                \
             }
 #else

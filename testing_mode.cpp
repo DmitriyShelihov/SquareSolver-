@@ -101,7 +101,8 @@ ERRORS compare_test_answer(enum SOLUTIONS solutions, int nsolutions_in_test, dou
         cooler_assert(!isfinite(x2), NAN_ERROR);
         }
     else
-        ;
+        {
+        }
     cooler_assert(!isfinite(solutions), NAN_ERROR);
     cooler_assert(!isfinite(nsolutions_in_test), NAN_ERROR);
     cooler_assert(!isfinite(x1_ref), NAN_ERROR);
@@ -149,7 +150,8 @@ ERRORS output_test_answer(double x1, double x1_ref, double x2, double x2_ref, in
         cooler_assert(!isfinite(x2), NAN_ERROR);
         }
     else
-        ;
+        {
+        }
     cooler_assert(!isfinite(x1_ref), NAN_ERROR);
 
     cooler_assert(!isfinite(x2_ref), NAN_ERROR);
@@ -166,7 +168,8 @@ ERRORS output_test_answer(double x1, double x1_ref, double x2, double x2_ref, in
             *is_testing_successful = false;
 
         if (output_solution(is_test_passed, x1, x2, x1_ref, x2_ref, solutions) == NOT_ERROR)
-            ;
+            {
+            }
 
         }
 
@@ -199,7 +202,8 @@ ERRORS output_solution(enum IS_TEST is_test_passed, double x1, double x2, double
         printf ("Root values were expected: %lf %lf\nGot the values of the roots: %lf %lf\n\n", x1_ref, x2_ref, x1, x2);
         }
     else
-        ;
+        {
+        }
     return NOT_ERROR;
     }
 
@@ -228,7 +232,8 @@ ERRORS read_test_data(int ntests, enum SOLUTIONS nsolutions_in_test, FILE* testi
     else if(nsolutions_in_test == TWO_SOLUTIONS)
         fscanf(testing_file, "%lf %lf", x1, x2);
     else
-        ;
+        {
+        }
     return NOT_ERROR;
     }
 
